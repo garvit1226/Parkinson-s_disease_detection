@@ -72,4 +72,6 @@ The website sends 22 values to the SVM in this exact order:
 
 This order MUST match the feature order used when training your SVM and fitting your scaler.
 
+## Live Demo
 
+https://parkinson-s-disease-detection-u8su.onrender.com/
