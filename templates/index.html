@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parkinson's Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <section class="hero">
+            <div class="badge">AI / ML HEALTH SCREENING</div>
+            <h1>Parkinson's Disease Detection</h1>
+            <p>
+                Enter the 22 voice-analysis features below to generate a prediction
+                using the trained SVM model.
+            </p>
+        </section>
+
+        {% if not model_ready %}
+        <div class="warning">
+            <strong>Model files not loaded.</strong>
+            <span>{{ load_error }}</span>
+        </div>
+        {% endif %}
+
+        <section class="card">
+            <form id="predictionForm">
+                <div class="section-title">
+                    <h2>Patient Voice Features</h2>
+                    <span>22 inputs required</span>
+                </div>
+
+                <div class="grid">
+                    <label>
+                        MDVP:Fo(Hz)
+                        <input type="number" step="any" name="MDVP:Fo(Hz)" required>
+                    </label>
+
+                    <label>
+                        MDVP:Fhi(Hz)
+                        <input type="number" step="any" name="MDVP:Fhi(Hz)" required>
+                    </label>
+
+                    <label>
+                        MDVP:Flo(Hz)
+                        <input type="number" step="any" name="MDVP:Flo(Hz)" required>
+                    </label>
+
+                    <label>
+                        MDVP:Jitter(%)
+                        <input type="number" step="any" name="MDVP:Jitter(%)" required>
+                    </label>
+
+                    <label>
+                        MDVP:Jitter(Abs)
+                        <input type="number" step="any" name="MDVP:Jitter(Abs)" required>
+                    </label>
+
+                    <label>
+                        MDVP:RAP
+                        <input type="number" step="any" name="MDVP:RAP" required>
+                    </label>
+
+                    <label>
+                        MDVP:PPQ
+                        <input type="number" step="any" name="MDVP:PPQ" required>
+                    </label>
+
+                    <label>
+                        Jitter:DDP
+                        <input type="number" step="any" name="Jitter:DDP" required>
+                    </label>
+
+                    <label>
+                        MDVP:Shimmer
+                        <input type="number" step="any" name="MDVP:Shimmer" required>
+                    </label>
+
+                    <label>
+                        MDVP:Shimmer(dB)
+                        <input type="number" step="any" name="MDVP:Shimmer(dB)" required>
+                    </label>
+
+                    <label>
+                        Shimmer:APQ3
+                        <input type="number" step="any" name="Shimmer:APQ3" required>
+                    </label>
+
+                    <label>
+                        Shimmer:APQ5
+                        <input type="number" step="any" name="Shimmer:APQ5" required>
+                    </label>
+
+                    <label>
+                        MDVP:APQ
+                        <input type="number" step="any" name="MDVP:APQ" required>
+                    </label>
+
+                    <label>
+                        Shimmer:DDA
+                        <input type="number" step="any" name="Shimmer:DDA" required>
+                    </label>
+
+                    <label>
+                        NHR
+                        <input type="number" step="any" name="NHR" required>
+                    </label>
+
+                    <label>
+                        HNR
+                        <input type="number" step="any" name="HNR" required>
+                    </label>
+
+                    <label>
+                        RPDE
+                        <input type="number" step="any" name="RPDE" required>
+                    </label>
+
+                    <label>
+                        DFA
+                        <input type="number" step="any" name="DFA" required>
+                    </label>
+
+                    <label>
+                        spread1
+                        <input type="number" step="any" name="spread1" required>
+                    </label>
+
+                    <label>
+                        spread2
+                        <input type="number" step="any" name="spread2" required>
+                    </label>
+
+                    <label>
+                        D2
+                        <input type="number" step="any" name="D2" required>
+                    </label>
+
+                    <label>
+                        PPE
+                        <input type="number" step="any" name="PPE" required>
+                    </label>
+                </div>
+
+                <button type="submit" id="predictBtn">
+                    <span>Run Prediction</span>
+                </button>
+            </form>
+
+            <div id="result" class="result hidden">
+                <div class="result-label">Prediction Result</div>
+                <h2 id="resultText"></h2>
+                <p id="confidenceText"></p>
+            </div>
+        </section>
+
+        <footer>
+            This tool is for educational/research purposes and is not a medical diagnosis.
+        </footer>
+    </main>
+
+    <script src="{{ url_for('static', path='script.js') }}"></script>
+</body>
+</html>
